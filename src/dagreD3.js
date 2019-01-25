@@ -16,23 +16,39 @@ class DagreD3React extends Component {
 
     }
 
-    keyDown(event){
-        console.log(event);
-        
-        if(event.keyCode === 17) {
-            this.svg.call(this.zoom)    
-            }
-        
-      }
-    keyUp(event){
-        if(event.keyCode === 17) {
-            this.svg.call(this.zoom)
-            this.svg.on("wheel.zoom", null);
+    keyDown(event) {
+        if (event.keyCode === 17) {
+            this.enableZoomAndPanGraph()
+        }
+
+    }
+    keyUp(event) {
+        if (event.keyCode === 17) {
+            this.enablePanGraph()
         }
     }
 
-    componentWillReceiveProps(){
-        this.newGraph()
+    enablePanGraph() {
+        this.svg.call(this.zoom).call(this.zoom.transform, d3.zoomIdentity.translate(this.x, this.y).scale(this.k))
+        this.svg.on("wheel.zoom", null);
+    }
+
+    enableZoomAndPanGraph() {
+        this.svg.call(this.zoom).call(this.zoom.transform, d3.zoomIdentity.translate(this.x, this.y).scale(this.k))
+
+
+    }
+
+    componentWillReceiveProps(props) {
+        props.nodes.forEach((node) => {
+            this.g.setNode(node.id, {
+                label: renderToStaticMarkup(node.html),
+                labelType: "html",
+                style: reactToCSS(node.style),
+                padding: 0
+            })
+        })
+       this.renderGraph2()
     }
 
     componentDidMount() {
@@ -42,35 +58,38 @@ class DagreD3React extends Component {
         this.newGraph()
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         document.removeEventListener("keydown", this.keyDown, false);
         document.addEventListener("keyup", this.keyUp, false);
 
-      }
+    }
 
-     zoomed() {         
-            console.log(this.svgGroup);
-        this.svgGroup.attr("transform", d3.event.transform);
+    zoomed() {
+        console.log('------------------------------------');
+        console.log(this.x);
+        console.log('------------------------------------');
+        this.x = d3.event.transform.x
+        this.y = d3.event.transform.y
+        this.k = d3.event.transform.k
+        this.svgGroup.attr('transform', 'translate(' + d3.event.transform.x + ',' + d3.event.transform.y + ') scale(' + d3.event.transform.k + ')');
+    }
 
-        
-      }
-
-    newGraph(){
+    newGraph() {
         this.zoom = d3.zoom()
-        .scaleExtent([1 / 2, 4])
-        .on("zoom", this.zoomed);
+            .scaleExtent([1 / 2, 4])
+            .on("zoom", this.zoomed);
 
 
         this.g = new dagreD3.graphlib.Graph().setGraph({});
-        this.props.nodes.forEach((node)=>{
-            this.g.setNode(node.id,{
+        this.props.nodes.forEach((node) => {
+            this.g.setNode(node.id, {
                 label: renderToStaticMarkup(node.html),
                 labelType: "html",
                 style: reactToCSS(node.style),
                 padding: 0
             })
         })
-        this.props.edges.forEach((edge)=>{
+        this.props.edges.forEach((edge) => {
             this.g.setEdge(edge.from, edge.to, {
                 labelType: "html",
                 label: edge.label,
@@ -82,30 +101,48 @@ class DagreD3React extends Component {
         this.svg = d3.select(this.refs.svg)
         this.svgGroup = d3.select(this.refs.group);
         this.graphRender = new dagreD3.render();
-        this.graphRender(this.svgGroup, this.g)
 
-        if(this.props.centerGraph){
-            this.centerGraph()
-        }
-        this.graphRender(this.svgGroup, this.g)
 
-        if(this.props.nodesOnClick){
-            this.svg.selectAll(".node").on('click',()=>{
+
+        this.renderGraph()
+
+
+        //this.graphRender(this.svgGroup, this.g)
+
+        if (this.props.nodesOnClick) {
+            this.svg.selectAll(".node").on('click', () => {
                 console.log("SSSSSSSSSSSSSSSS");
-                
+
             })
         }
-       // this.svg.call(this.zoom).filter(function() { return !event.button && event.type !== 'wheel'; })
+        if (this.props.centerGraph) {
+            this.centerGraph()
+        }
 
+        this.enablePanGraph()
+    }
+
+    renderGraph(){
+
+        this.graphRender(this.svgGroup, this.g)
 
 
     }
 
-    centerGraph(){
+    renderGraph2(){
+        this.svgGroup.attr("transform", "translate(" + this.x + ", "+this.y+") scale(" + 1 + ")");
+        this.graphRender(this.svgGroup, this.g)
+        this.svgGroup.attr("transform", "translate(" + this.x + ", "+this.y+") scale(" + this.k + ")");
+    }
+
+    centerGraph() {
         var svg = this.svg.node();
-        var xCenterOffset = (svg.getBoundingClientRect().width - this.g.graph().width) / 2;
-        this.svgGroup.attr("transform", "translate(" + xCenterOffset + ", 20)");
-        this.svg.attr("height", this.g.graph().height + 40);
+        this.x = (svg.getBoundingClientRect().width - this.g.graph().width) / 2;
+        this.y = 20
+        this.k = 1
+        this.svgGroup.attr("transform", "translate(" + this.x + ", "+this.y+") ");
+        // this.zoom.translate([80,80]);
+
     }
 
     updateGraph() {
@@ -117,10 +154,10 @@ class DagreD3React extends Component {
             <div>
                 <svg
                     style={this.props.svgStyle}
-                    ref= 'svg'
+                    ref='svg'
 
                 >
-                    <g ref='group'/>
+                    <g ref='group'></g>
 
                 </svg>
 
