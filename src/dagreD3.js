@@ -48,7 +48,16 @@ class DagreD3React extends Component {
                 padding: 0
             })
         })
-       this.renderGraph2()
+        props.edges.forEach((edge) => {
+            this.g.setEdge(edge.from, edge.to, {
+                labelType: "html",
+                label: edge.label,
+                style: reactToCSS(edge.style),
+                // style: "stroke: #f66; stroke-width: 3px; stroke-dasharray: 5, 5;",
+                arrowheadStyle: reactToCSS(edge.arrowheadStyle)
+            })
+        })
+       this.updateGraph()
     }
 
     componentDidMount() {
@@ -65,9 +74,6 @@ class DagreD3React extends Component {
     }
 
     zoomed() {
-        console.log('------------------------------------');
-        console.log(this.x);
-        console.log('------------------------------------');
         this.x = d3.event.transform.x
         this.y = d3.event.transform.y
         this.k = d3.event.transform.k
@@ -129,25 +135,28 @@ class DagreD3React extends Component {
 
     }
 
-    renderGraph2(){
+    updateGraph(){
         this.svgGroup.attr("transform", "translate(" + this.x + ", "+this.y+") scale(" + 1 + ")");
         this.graphRender(this.svgGroup, this.g)
         this.svgGroup.attr("transform", "translate(" + this.x + ", "+this.y+") scale(" + this.k + ")");
+        this.setSvgHeight()
     }
 
     centerGraph() {
-        var svg = this.svg.node();
-        this.x = (svg.getBoundingClientRect().width - this.g.graph().width) / 2;
-        this.y = 20
+        this.svgNode = this.svg.node();
+        this.x = (this.svgNode.getBoundingClientRect().width - this.g.graph().width) / 2;
+        this.y = 100
         this.k = 1
         this.svgGroup.attr("transform", "translate(" + this.x + ", "+this.y+") ");
-        // this.zoom.translate([80,80]);
+        this.setSvgHeight()
+    }
+
+    setSvgHeight(){
+        this.graphHeight = this.g.graph().height
+        this.svgNode.setAttribute("height", this.graphHeight + this.y*2);    
 
     }
 
-    updateGraph() {
-
-    }
 
     render() {
         return (

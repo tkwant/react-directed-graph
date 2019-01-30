@@ -4,6 +4,7 @@ import Node1 from './components/node1'
 class App extends Component {
     constructor() {
         super()
+        this.text = "test"
         const nodeOuterStyle = {
             fill: "white", 
             strokeWidth:3,
@@ -12,7 +13,6 @@ class App extends Component {
         }
         this.svgStyle = {
             width: "800px",
-            height: "400px",
             border: "2px solid"
 
         }
@@ -41,6 +41,27 @@ class App extends Component {
                     />,
                     style: nodeOuterStyle
                 },
+                {
+                    id: 3,
+                    html: <Node1 
+                    name= {"bigBen 3"}
+                    />,
+                    style: nodeOuterStyle
+                },
+                {
+                    id: 4,
+                    html: <Node1 
+                    name= {"bigBen 3"}
+                    />,
+                    style: nodeOuterStyle
+                },
+                {
+                    id: 5,
+                    html: <Node1 
+                    name= {"bigBen 3"}
+                    />,
+                    style: nodeOuterStyle
+                },
             ],
             edges: [
                 {
@@ -49,7 +70,8 @@ class App extends Component {
                     label: "",
                     style: {
                         stroke: '#000',
-                        strokeWidth: '3px'
+                        strokeWidth: '3px',
+                        fill: "white"
                     },
                     arrowheadStyle: {
                         fill: '#000',
@@ -61,7 +83,65 @@ class App extends Component {
                     label: "",
                     style: {
                         stroke: '#000',
-                        strokeWidth: '3px'
+                        strokeWidth: '3px',
+                        fill: "white"
+
+                    },
+                    arrowheadStyle: {
+                        fill: '#000',
+                    }
+                },
+                {
+                    from: 1,
+                    to: 4,
+                    label: "",
+                    style: {
+                        stroke: '#000',
+                        strokeWidth: '3px',
+                        fill: "white"
+
+                    },
+                    arrowheadStyle: {
+                        fill: '#000',
+                    }
+                },
+                {
+                    from: 2,
+                    to: 3,
+                    label: "",
+                    style: {
+                        stroke: '#000',
+                        strokeWidth: '3px',
+                        fill: "white"
+
+                    },
+                    arrowheadStyle: {
+                        fill: '#000',
+                    }
+                },
+                {
+                    from: 3,
+                    to: 4,
+                    label: "",
+                    style: {
+                        stroke: '#000',
+                        strokeWidth: '3px',
+                        fill: "white"
+
+                    },
+                    arrowheadStyle: {
+                        fill: '#000',
+                    }
+                },
+                {
+                    from: 3,
+                    to: 5,
+                    label: "",
+                    style: {
+                        stroke: '#000',
+                        strokeWidth: '3px',
+                        fill: "white"
+
                     },
                     arrowheadStyle: {
                         fill: '#000',
@@ -82,11 +162,29 @@ class App extends Component {
 
     testButtonHandler(){
         const nodes = this.state.nodes
+        this.text = this.text +"ssss"
         nodes[1].html = 
         <Node1 
-        name= {"This is a very long text"}
+        name= {this.text }
         />
-        this.setState(nodes)
+        const edges = this.state.edges
+        edges.push(
+            {
+                from: 1,
+                to: 2,
+                label: "",
+                style: {
+                    stroke: '#000',
+                    strokeWidth: '3px',
+                    fill: "white"
+
+                },
+                arrowheadStyle: {
+                    fill: '#000',
+                }
+            }
+        )
+        this.setState({nodes, edges})
     }
 
     render() {
