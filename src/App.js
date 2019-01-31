@@ -13,6 +13,7 @@ class App extends Component {
         }
         this.svgStyle = {
             width: "800px",
+            // height: "800px",
             border: "2px solid"
 
         }

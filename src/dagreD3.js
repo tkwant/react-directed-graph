@@ -3,8 +3,6 @@ import * as dagreD3 from 'dagre-d3'
 import * as d3 from 'd3'
 import reactToCSS from 'react-style-object-to-css'
 import { renderToStaticMarkup } from 'react-dom/server'
-import reactElementToJSXString from 'react-element-to-jsx-string';
-import { type } from 'os';
 
 class DagreD3React extends Component {
     constructor(props) {
@@ -57,7 +55,7 @@ class DagreD3React extends Component {
                 arrowheadStyle: reactToCSS(edge.arrowheadStyle)
             })
         })
-       this.updateGraph()
+        this.updateGraph()
     }
 
     componentDidMount() {
@@ -108,37 +106,29 @@ class DagreD3React extends Component {
         this.svgGroup = d3.select(this.refs.group);
         this.graphRender = new dagreD3.render();
 
-
-
         this.renderGraph()
-
-
-        //this.graphRender(this.svgGroup, this.g)
 
         if (this.props.nodesOnClick) {
             this.svg.selectAll(".node").on('click', () => {
-                console.log("SSSSSSSSSSSSSSSS");
 
             })
         }
         if (this.props.centerGraph) {
             this.centerGraph()
         }
+        this.setSvgHeight()
 
         this.enablePanGraph()
     }
 
-    renderGraph(){
-
+    renderGraph() {
         this.graphRender(this.svgGroup, this.g)
-
-
     }
 
-    updateGraph(){
-        this.svgGroup.attr("transform", "translate(" + this.x + ", "+this.y+") scale(" + 1 + ")");
+    updateGraph() {
+        this.svgGroup.attr("transform", "translate(" + this.x + ", " + this.y + ") scale(" + 1 + ")");
         this.graphRender(this.svgGroup, this.g)
-        this.svgGroup.attr("transform", "translate(" + this.x + ", "+this.y+") scale(" + this.k + ")");
+        this.svgGroup.attr("transform", "translate(" + this.x + ", " + this.y + ") scale(" + this.k + ")");
         this.setSvgHeight()
     }
 
@@ -147,16 +137,13 @@ class DagreD3React extends Component {
         this.x = (this.svgNode.getBoundingClientRect().width - this.g.graph().width) / 2;
         this.y = 100
         this.k = 1
-        this.svgGroup.attr("transform", "translate(" + this.x + ", "+this.y+") ");
-        this.setSvgHeight()
+        this.svgGroup.attr("transform", "translate(" + this.x + ", " + this.y + ") ");
     }
 
-    setSvgHeight(){
+    setSvgHeight() {
         this.graphHeight = this.g.graph().height
-        this.svgNode.setAttribute("height", this.graphHeight + this.y*2);    
-
+        this.svgNode.setAttribute("height", this.props.height ? this.props.height : this.graphHeight + this.y * 2);
     }
-
 
     render() {
         return (
@@ -164,12 +151,9 @@ class DagreD3React extends Component {
                 <svg
                     style={this.props.svgStyle}
                     ref='svg'
-
                 >
                     <g ref='group'></g>
-
                 </svg>
-
             </div>
         )
     }
