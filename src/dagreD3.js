@@ -3,6 +3,8 @@ import * as dagreD3 from 'dagre-d3'
 import * as d3 from 'd3'
 import reactToCSS from 'react-style-object-to-css'
 import { renderToStaticMarkup } from 'react-dom/server'
+import "./dagreD3.scss"
+
 
 class DagreD3React extends Component {
     constructor(props) {
@@ -10,16 +12,14 @@ class DagreD3React extends Component {
         this.zoomed = this.zoomed.bind(this)
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
-
-
     }
 
     keyDown(event) {
         if (event.keyCode === 17) {
             this.enableZoomAndPanGraph()
         }
-
     }
+
     keyUp(event) {
         if (event.keyCode === 17) {
             this.enablePanGraph()
@@ -34,8 +34,6 @@ class DagreD3React extends Component {
 
     enableZoomAndPanGraph() {
         this.svg.call(this.zoom).call(this.zoom.transform, d3.zoomIdentity.translate(this.x, this.y).scale(this.k))
-
-
     }
 
     componentWillReceiveProps(props) {
@@ -62,14 +60,12 @@ class DagreD3React extends Component {
     componentDidMount() {
         document.addEventListener("keydown", this.keyDown, false);
         document.addEventListener("keyup", this.keyUp, false);
-
         this.newGraph()
     }
 
     componentWillUnmount() {
         document.removeEventListener("keydown", this.keyDown, false);
         document.addEventListener("keyup", this.keyUp, false);
-
     }
 
     zoomed() {
@@ -81,10 +77,8 @@ class DagreD3React extends Component {
 
     newGraph() {
         this.zoom = d3.zoom()
-            .scaleExtent([1 / 2, 4])
+            // .scaleExtent([1 / 2, 4])
             .on("zoom", this.zoomed);
-
-
         this.g = new dagreD3.graphlib.Graph().setGraph({});
         this.props.nodes.forEach((node) => {
             this.g.setNode(node.id, {
@@ -106,19 +100,15 @@ class DagreD3React extends Component {
         this.svg = d3.select(this.refs.svg)
         this.svgGroup = d3.select(this.refs.group);
         this.graphRender = new dagreD3.render();
-
         this.renderGraph()
-
         if (this.props.nodesOnClick) {
             this.svg.selectAll(".node").on('click', () => {
-
             })
         }
         if (this.props.centerGraph) {
             this.centerGraph()
         }
         this.setSvgHeight()
-
         this.enablePanGraph()
     }
 
@@ -150,6 +140,7 @@ class DagreD3React extends Component {
         return (
             <div>
                 <svg
+                    className="svgtest"
                     style={this.props.svgStyle}
                     ref='svg'
                 >

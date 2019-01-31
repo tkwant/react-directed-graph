@@ -7,13 +7,10 @@ class App extends Component {
         this.text = "test"
         const nodeOuterStyle = {
             fill: "white", 
-            strokeWidth:3,
-            stroke: "rgb(0,0,0)",
-            padding:0
         }
         this.svgStyle = {
             width: "800px",
-            // height: "800px",
+            height: "800px",
             border: "2px solid"
 
         }
