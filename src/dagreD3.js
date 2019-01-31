@@ -3,7 +3,11 @@ import * as dagreD3 from 'dagre-d3'
 import * as d3 from 'd3'
 import reactToCSS from 'react-style-object-to-css'
 import { renderToStaticMarkup } from 'react-dom/server'
-import "./dagreD3.scss"
+import './dagreD3.scss'
+import './components/node.scss'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 
 class DagreD3React extends Component {

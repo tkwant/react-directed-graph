@@ -1,14 +1,16 @@
 import React from 'react'
-import "./node.scss"
+import { Progress } from 'reactstrap';
 
-// Attention this is no a normal React Component it can only return view because it is in svg (foreign Object)
 
 const node1 = (props) => {
     return (
-        <div className="graph-node">
-            <div className="graph-node-title" >{props.name}</div>
-            <div className="graph-node-body"  >Body</div>
-            <div className="graph-node-footer">zzz</div>
+        <div className='graph-node'>
+            <div className='graph-node-title'>{props.name}</div>
+            <div className='graph-node-body'>
+            <div className="text-center">50%</div>
+             <Progress value={50} />    
+            </div>
+            <div className='graph-node-footer'>zzz</div>
         </div>
     )
 }

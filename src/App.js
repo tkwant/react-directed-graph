@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import DagreD3 from './dagreD3'
 import Node1 from './components/node1'
+import { Progress } from 'reactstrap';
+
+
 class App extends Component {
     constructor() {
         super()
@@ -197,6 +200,8 @@ class App extends Component {
                     nodes={this.state.nodes}
                     edges={this.state.edges}
                 />
+                            <div className="text-center">50%</div>
+             <Progress value={50} />    
                 <button onClick={this.testButtonHandler}>My Testing Button</button>
                 <h1>asdasd</h1>
                 <h1>asdasd</h1>
