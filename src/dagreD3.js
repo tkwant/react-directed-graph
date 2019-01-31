@@ -29,6 +29,7 @@ class DagreD3React extends Component {
     enablePanGraph() {
         this.svg.call(this.zoom).call(this.zoom.transform, d3.zoomIdentity.translate(this.x, this.y).scale(this.k))
         this.svg.on("wheel.zoom", null);
+        this.svg.on("dblclick.zoom", null)
     }
 
     enableZoomAndPanGraph() {
