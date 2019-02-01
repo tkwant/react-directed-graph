@@ -9,7 +9,7 @@ $borderRadius: 10px;
 
 .graph-node{
     border: $borderWidth solid red;
-    border-radius: $borderRadius;
+    border-radius: $borderRadius ;
     .graph-node-title{
         background-color: cornflowerblue;
         border-top-left-radius: $borderRadius - $borderWidth;

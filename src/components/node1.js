@@ -1,14 +1,20 @@
 import React from 'react'
-import { Progress } from 'reactstrap';
+import { Progress, Button } from 'reactstrap';
+
+
 
 
 const node1 = (props) => {
     return (
         <div className='graph-node'>
-            <div className='graph-node-title'>{props.name}</div>
+            <div className='graph-node-title'>{props.title}</div>
             <div className='graph-node-body'>
             <div className="text-center">50%</div>
              <Progress value={50} />    
+             <Button  onClick= {()=>{
+                 console.log("UUUUUUU")
+             }} color="primary">primary</Button>{' '}
+
             </div>
             <div className='graph-node-footer'>zzz</div>
         </div>

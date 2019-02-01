@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class DagreD3React extends Component {
     constructor(props) {
         super(props)
+
         this.zoomed = this.zoomed.bind(this)
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
@@ -41,11 +42,11 @@ class DagreD3React extends Component {
     }
 
     componentWillReceiveProps(props) {
-        props.nodes.forEach((node) => {
-            this.g.setNode(node.id, {
-                label: renderToStaticMarkup(node.html),
+        props.children.forEach((node) => {
+            this.g.setNode(node.props.id, {
+                label: renderToStaticMarkup(node),
                 labelType: "html",
-                style: reactToCSS(node.style),
+                style: reactToCSS(node.props.style),
                 padding: 0
             })
         })
@@ -84,21 +85,26 @@ class DagreD3React extends Component {
             // .scaleExtent([1 / 2, 4])
             .on("zoom", this.zoomed);
         this.g = new dagreD3.graphlib.Graph().setGraph({});
-        this.props.nodes.forEach((node) => {
-            this.g.setNode(node.id, {
-                label: renderToStaticMarkup(node.html),
+        this.props.children.forEach((node) => {
+            this.g.setNode(node.props.id, {
+                label: renderToStaticMarkup(node),
                 labelType: "html",
-                style: reactToCSS(node.style),
+                style: reactToCSS(node.props.style),
                 padding: 0
             })
         })
-        this.props.edges.forEach((edge) => {
-            this.g.setEdge(edge.from, edge.to, {
-                labelType: "html",
-                label: edge.label,
-                style: reactToCSS(edge.style),
-                // style: "stroke: #f66; stroke-width: 3px; stroke-dasharray: 5, 5;",
-                arrowheadStyle: reactToCSS(edge.arrowheadStyle)
+        this.props.children.forEach((node) =>{
+            node.props.connection.forEach((line)=>{
+                console.log('---------line---------------------------');
+                console.log(line);
+                console.log('------------------------------------');
+                this.g.setEdge(node.props.id, line.id, {
+                    labelType: 'html',
+                    label: line.label,
+                    style: reactToCSS(line.lineStyle),
+                    // style: "stroke: #f66; stroke-width: 3px; stroke-dasharray: 5, 5;",
+                    arrowheadStyle: reactToCSS(line.arrowheadStyle)
+                })
             })
         })
         this.svg = d3.select(this.refs.svg)
@@ -107,6 +113,7 @@ class DagreD3React extends Component {
         this.renderGraph()
         if (this.props.nodesOnClick) {
             this.svg.selectAll(".node").on('click', () => {
+
             })
         }
         if (this.props.centerGraph) {
