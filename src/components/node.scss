@@ -1,0 +1,27 @@
+$borderWidth: 2px;
+$borderRadius: 10px;
+
+
+.graph-node{
+    border: $borderWidth solid black;
+    border-radius: $borderRadius ;
+    .graph-node-title{
+        background-color: cornflowerblue;
+        border-top-left-radius: $borderRadius - $borderWidth;
+        border-top-right-radius: $borderRadius - $borderWidth;
+        padding: 5px
+    }
+    
+    .graph-node-body{
+        background-color: snow;
+        padding: 5px
+    }
+    
+    .graph-node-footer{
+        background-color: green;
+        border-bottom-left-radius: $borderRadius - $borderWidth;
+        border-bottom-right-radius: $borderRadius - $borderWidth;
+        padding: 5px
+    
+    }
+}

@@ -8,9 +8,6 @@ class App extends Component {
     constructor() {
         super()
         this.text = "test"
-        const nodeOuterStyle = {
-            fill: "white",
-        }
         this.svgStyle = {
             width: "800px",
             border: "2px solid"
@@ -22,19 +19,9 @@ class App extends Component {
                     id: 0,
                     type: "node1",
                     title: "BigBen",
-                    style: nodeOuterStyle,
                     connection: [
                         {
                             id: 1,
-                            label: "",
-                            lineStyle: {
-                                stroke: '#000',
-                                strokeWidth: '3px',
-                                fill: "white"
-                            },
-                            arrowheadStyle: {
-                                fill: '#000',
-                            }
                         }
                     ],
                 },
@@ -42,19 +29,9 @@ class App extends Component {
                     id: 1,
                     type: "node1",
                     title: "BigBen",
-                    style: nodeOuterStyle,
                     connection: [
                         {
-                            id: 2,
-                            label: "",
-                            lineStyle: {
-                                stroke: '#000',
-                                strokeWidth: '3px',
-                                fill: "white"
-                            },
-                            arrowheadStyle: {
-                                fill: '#000',
-                            }
+                            id: 2, 
                         }
                     ],
                 },
@@ -62,19 +39,10 @@ class App extends Component {
                     id: 2,
                     type: "node1",
                     title: "BigBen",
-                    style: nodeOuterStyle,
                     connection: [
                         {
                             id: 3,
-                            label: "",
-                            lineStyle: {
-                                stroke: '#000',
-                                strokeWidth: '3px',
-                                fill: "white"
-                            },
-                            arrowheadStyle: {
-                                fill: '#000',
-                            }
+                            label: 'Very long label for line',
                         }
                     ],
                 },
@@ -82,19 +50,10 @@ class App extends Component {
                     id: 3,
                     type: "node1",
                     title: "BigBen",
-                    style: nodeOuterStyle,
                     connection: [
                         {
                             id: 4,
-                            label: "",
-                            lineStyle: {
-                                stroke: '#000',
-                                strokeWidth: '3px',
-                                fill: "white"
-                            },
-                            arrowheadStyle: {
-                                fill: '#000',
-                            }
+                            label: 'test label'
                         }
                     ],
                 },
@@ -102,19 +61,9 @@ class App extends Component {
                     id: 4,
                     type: "node1",
                     title: "BigBen",
-                    style: nodeOuterStyle,
                     connection: [
                         {
                             id: 5,
-                            label: "",
-                            lineStyle: {
-                                stroke: '#000',
-                                strokeWidth: '3px',
-                                fill: "white"
-                            },
-                            arrowheadStyle: {
-                                fill: '#000',
-                            }
                         }
                     ],
                 },
@@ -122,18 +71,19 @@ class App extends Component {
                     id: 5,
                     type: "node1",
                     title: "BigBen",
-                    style: nodeOuterStyle,
                     connection: [
                         {
                             id: 1,
                             label: "",
-                            lineStyle: {
-                                stroke: '#000',
-                                strokeWidth: '3px',
-                                fill: "white"
+                           lineStyle: {
+                                stroke: 'red',
+                                strokeWidth: '1.8px',
+                                fill: 'white',
+                                strokeDasharray: '5, 5'
                             },
                             arrowheadStyle: {
-                                fill: '#000',
+                                fill: 'red',
+                                stroke: 'none'
                             }
                         }
                     ],
