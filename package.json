@@ -4,35 +4,40 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
-    "test": "echo \"No test specified\" && exit 0"
+    "start": "webpack-dev-server --config ./webpack.dev-server.config.js --mode development",
+    "test": "echo \"No test specified\" && exit 0",
+    "transpile": "babel src -d dist --copy-files",
+    "build:dev": "webpack --config webpack.build.config.js --mode=development",
+    "build": "webpack --config webpack.build.config.js --mode=production"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tobias Kwant",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
-    "react-hot-loader": "^4.3.11",
-    "webpack": "^4.23.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
+    "bootstrap": "^4.2.1",
+    "clean-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
-    "style-loader": "^0.23.1",
+    "node-sass": "^4.10.0",
+    "react-hot-loader": "^4.3.11",
+    "reactstrap": "^7.1.0",
     "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
-    "node-sass": "^4.10.0"
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
-    "bootstrap": "^4.2.1",
     "dagre-d3": "^0.6.1",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-element-to-jsx-string": "^14.0.2",
-    "react-style-object-to-css": "^1.1.2",
-    "reactstrap": "^7.1.0"
+    "react-style-object-to-css": "^1.1.2"
   }
 }

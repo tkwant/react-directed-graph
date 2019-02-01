@@ -3,9 +3,12 @@ $borderRadius: 10px;
 
 
 .graph-node{
-    border: $borderWidth solid black;
+    border: $borderWidth solid gray;
     border-radius: $borderRadius ;
     .graph-node-title{
+        color: white;
+        font-size: large;
+        text-align: center;
         background-color: cornflowerblue;
         border-top-left-radius: $borderRadius - $borderWidth;
         border-top-right-radius: $borderRadius - $borderWidth;
@@ -14,14 +17,21 @@ $borderRadius: 10px;
     
     .graph-node-body{
         background-color: snow;
-        padding: 5px
+        padding: 13px
     }
     
     .graph-node-footer{
+        color: white;
+        font-size: small;
+        text-align: center;
         background-color: green;
         border-bottom-left-radius: $borderRadius - $borderWidth;
         border-bottom-right-radius: $borderRadius - $borderWidth;
         padding: 5px
     
     }
+}
+
+.progress{
+    margin-bottom: 10px;
 }

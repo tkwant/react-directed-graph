@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import DagreD3 from './dagreD3'
 import Node1 from './components/node1'
-import { Progress } from 'reactstrap';
-
+import './components/node.scss'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
     constructor() {
         super()
-        this.text = "test"
         this.svgStyle = {
             width: "800px",
             border: "2px solid"
@@ -18,64 +17,39 @@ class App extends Component {
                 {
                     id: 0,
                     type: "node1",
-                    title: "BigBen",
+                    title: "NODE 1",
+                    footer: "CUCUMBER",
                     connection: [
                         {
                             id: 1,
+                        },
+                        {
+                            id: 2,
                         }
                     ],
                 },
                 {
                     id: 1,
                     type: "node1",
-                    title: "BigBen",
+                    title: "NODE 2",
+                    footer: "CUCUMBER",
                     connection: [
                         {
-                            id: 2, 
+                            id: 2,
+                            label: 'test label ',
+
                         }
                     ],
                 },
                 {
                     id: 2,
                     type: "node1",
-                    title: "BigBen",
+                    title: "NODE 3",
+                    footer: "CUCUMBER",
                     connection: [
                         {
-                            id: 3,
-                            label: 'Very long label for line',
-                        }
-                    ],
-                },
-                {
-                    id: 3,
-                    type: "node1",
-                    title: "BigBen",
-                    connection: [
-                        {
-                            id: 4,
-                            label: 'test label'
-                        }
-                    ],
-                },
-                {
-                    id: 4,
-                    type: "node1",
-                    title: "BigBen",
-                    connection: [
-                        {
-                            id: 5,
-                        }
-                    ],
-                },
-                {
-                    id: 5,
-                    type: "node1",
-                    title: "BigBen",
-                    connection: [
-                        {
-                            id: 1,
-                            label: "",
-                           lineStyle: {
+                            id: 0,
+                            lineStyle: {
                                 stroke: 'red',
                                 strokeWidth: '1.8px',
                                 fill: 'white',
@@ -87,7 +61,49 @@ class App extends Component {
                             }
                         }
                     ],
-                },
+                }
+                // {
+                //     id: 3,
+                //     type: "node1",
+                //     title: "BigBen",
+                //     connection: [
+                //         {
+                //             id: 4,
+                //             label: 'test label'
+                //         }
+                //     ],
+                // },
+                // {
+                //     id: 4,
+                //     type: "node1",
+                //     title: "BigBen",
+                //     connection: [
+                //         {
+                //             id: 5,
+                //         }
+                //     ],
+                // },
+                // {
+                //     id: 5,
+                //     type: "node1",
+                //     title: "BigBen",
+                //     connection: [
+                //         {
+                //             id: 1,
+                //             label: "",
+                //             lineStyle: {
+                //                 stroke: 'red',
+                //                 strokeWidth: '1.8px',
+                //                 fill: 'white',
+                //                 strokeDasharray: '5, 5'
+                //             },
+                //             arrowheadStyle: {
+                //                 fill: 'red',
+                //                 stroke: 'none'
+                //             }
+                //         }
+                //     ],
+                // },
             ],
         }
         this.testButtonHandler = this.testButtonHandler.bind(this)
@@ -102,30 +118,9 @@ class App extends Component {
     }
 
     testButtonHandler() {
-        const nodes = this.state.nodes
-        this.text = this.text + "ssss"
-        nodes[1].html =
-            <Node1
-                name={this.text}
-            />
-        const edges = this.state.edges
-        edges.push(
-            {
-                from: 1,
-                to: 2,
-                label: "",
-                style: {
-                    stroke: '#000',
-                    strokeWidth: '3px',
-                    fill: "white"
-
-                },
-                arrowheadStyle: {
-                    fill: '#000',
-                }
-            }
-        )
-        this.setState({ nodes, edges })
+        let state = this.state
+        state.nodes[1].title += "U"
+        this.setState(state)
     }
 
     renderNodes() {
@@ -146,65 +141,11 @@ class App extends Component {
                     centerGraph={true}
                     svgStyle={this.svgStyle}
                     ref={this.graph}
-                    nodesOnClick={this.nodesOnClick}
+                    // nodesOnClick={this.nodesOnClick}
                 >
                     {this.renderNodes()}
                 </DagreD3>
-                <div className="text-center">50%</div>
-                <Progress value={50} />
                 <button onClick={this.testButtonHandler}>My Testing Button</button>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-
             </div>
         )
     }
