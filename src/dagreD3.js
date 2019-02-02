@@ -108,6 +108,14 @@ class DagreD3React extends Component {
         this.svgGroup = d3.select(this.refs.group);
         this.graphRender = new dagreD3.render();
         this.renderGraph()
+
+        this.svg.selectAll(".form-check-input").on('click', () => {
+            console.log('------------------------------------');
+            console.log("With selection this works. Look at components/node1.js this does not work");
+            console.log('------------------------------------');
+        })
+
+
         // if (this.props.nodesOnClick) {
         //     this.svg.selectAll(".node").on('click', () => {
 
