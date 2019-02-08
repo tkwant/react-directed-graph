@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
-import DagreD3 from './dagreD3'
+import DagreD3 from '../dist/react-directed-graph'
 import Node1 from './components/node1'
 import './components/node.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
+
 
 class App extends Component {
     constructor() {
@@ -12,12 +17,16 @@ class App extends Component {
             border: "2px solid"
 
         }
+
+        this.toggle = this.toggle.bind(this);
+        this.nodesOnClick = this.nodesOnClick.bind(this)
         this.state = {
+            modal: false,
             nodes: [
                 {
                     id: 0,
                     type: "node1",
-                    title: "NODE 1",
+                    title: 'DATASOURCE',
                     footer: "CUCUMBER",
                     connection: [
                         {
@@ -31,7 +40,7 @@ class App extends Component {
                 {
                     id: 1,
                     type: "node1",
-                    title: "NODE 2",
+                    title: "SCRIPT",
                     footer: "CUCUMBER",
                     connection: [
                         {
@@ -44,7 +53,7 @@ class App extends Component {
                 {
                     id: 2,
                     type: "node1",
-                    title: "NODE 3",
+                    title: "ANNOTATIONTASK",
                     footer: "CUCUMBER",
                     connection: [
                         {
@@ -114,7 +123,10 @@ class App extends Component {
     }
 
     nodesOnClick(id) {
-
+        console.log('----------id--------------------------');
+        console.log(id);
+        console.log('------------------------------------');
+        this.toggle()
     }
 
     testButtonHandler() {
@@ -133,6 +145,12 @@ class App extends Component {
         })
     }
 
+    toggle() {
+        this.setState({
+          modal: !this.state.modal
+        });
+      }
+
     render() {
         return (
             <div>
@@ -141,11 +159,24 @@ class App extends Component {
                     centerGraph={true}
                     svgStyle={this.svgStyle}
                     ref={this.graph}
-                    // nodesOnClick={this.nodesOnClick}
+                    nodesOnClick={this.nodesOnClick}
                 >
                     {this.renderNodes()}
                 </DagreD3>
                 <button onClick={this.testButtonHandler}>My Testing Button</button>
+                <div>
+        {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+          <ModalBody>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
+            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
+      </div>
             </div>
         )
     }

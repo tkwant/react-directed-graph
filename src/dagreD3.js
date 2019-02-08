@@ -60,8 +60,8 @@ class DagreD3React extends Component {
     }
 
     componentWillUnmount() {
-        document.removeEventListener("keydown", this.keyDown, false);
-        document.addEventListener("keyup", this.keyUp, false);
+        // document.removeEventListener("keydown", this.keyDown, false);
+        // document.addEventListener("keyup", this.keyUp, false);
     }
 
     zoomed() {
@@ -97,6 +97,15 @@ class DagreD3React extends Component {
         })
     }
 
+    addNodeClickListener(){
+        if (this.props.nodesOnClick) {
+            this.svg.selectAll(".node").on('click', (e) => {
+
+                this.props.nodesOnClick(Number(e))
+            })
+        }
+    }
+
     newGraph() {
         this.zoom = d3.zoom()
             // .scaleExtent([1 / 2, 4])
@@ -109,23 +118,12 @@ class DagreD3React extends Component {
         this.graphRender = new dagreD3.render();
         this.renderGraph()
 
-        this.svg.selectAll(".form-check-input").on('click', () => {
-            console.log('------------------------------------');
-            console.log("With selection this works. Look at components/node1.js this does not work");
-            console.log('------------------------------------');
-        })
-
-
-        // if (this.props.nodesOnClick) {
-        //     this.svg.selectAll(".node").on('click', () => {
-
-        //     })
-        // }
         if (this.props.centerGraph) {
             this.centerGraph()
         }
         this.setSvgHeight()
         this.enablePanGraph()
+        this.addNodeClickListener()
     }
 
     renderGraph() {
@@ -138,6 +136,8 @@ class DagreD3React extends Component {
         this.graphRender(this.svgGroup, this.g)
         this.svgGroup.attr("transform", "translate(" + this.x + ", " + this.y + ") scale(" + this.k + ")");
         this.setSvgHeight()
+        this.addNodeClickListener()
+
     }
 
     centerGraph() {
