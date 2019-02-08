@@ -10,7 +10,15 @@
     "build:dev": "webpack --config webpack.build.config.js --mode=development",
     "build": "webpack --config webpack.build.config.js --mode=production"
   },
-  "keywords": ["graph", "react", "directed", "d3", "dagre", "dagreD3", "directed graph"],
+  "keywords": [
+    "graph",
+    "react",
+    "directed",
+    "d3",
+    "dagre",
+    "dagreD3",
+    "directed graph"
+  ],
   "author": "Tobias Kwant",
   "license": "ISC",
   "devDependencies": {
@@ -38,8 +46,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.7.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "dagre-d3": "^0.6.1",
-    "i": "^0.3.6",
-    "npm": "^6.7.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-element-to-jsx-string": "^14.0.2",
