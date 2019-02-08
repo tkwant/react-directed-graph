@@ -1,8 +1,8 @@
 {
-  "name": "minimal-react-webpack-babel-setup",
+  "name": "react-directed-graph",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/react-directed-graph.js",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.dev-server.config.js --mode development",
     "test": "echo \"No test specified\" && exit 0",
@@ -10,7 +10,15 @@
     "build:dev": "webpack --config webpack.build.config.js --mode=development",
     "build": "webpack --config webpack.build.config.js --mode=production"
   },
-  "keywords": [],
+  "keywords": [
+    "graph",
+    "react",
+    "directed",
+    "d3",
+    "dagre",
+    "dagreD3",
+    "directed graph"
+  ],
   "author": "Tobias Kwant",
   "license": "ISC",
   "devDependencies": {
@@ -34,6 +42,9 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.14",
+    "@fortawesome/free-solid-svg-icons": "^5.7.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "dagre-d3": "^0.6.1",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",

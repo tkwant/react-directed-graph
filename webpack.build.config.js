@@ -3,7 +3,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/dagreD3.js",
   module: {
     rules: [
       {
@@ -25,6 +25,8 @@ module.exports = {
           }
         ]
       },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader" },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader" },
     ]
   },
   resolve: {
@@ -42,4 +44,10 @@ module.exports = {
     new CleanWebpackPlugin(["dist"]),
     new webpack.HotModuleReplacementPlugin()
   ],
+  devtool: "source-map",
+  devServer: {
+    contentBase: "./examples",
+    hot: true,
+    port: 9001
+  }
 };
