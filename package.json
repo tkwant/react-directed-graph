@@ -1,6 +1,6 @@
 {
   "name": "react-directed-graph",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/react-directed-graph.js",
   "scripts": {

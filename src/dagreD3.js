@@ -22,6 +22,10 @@ class DagreD3React extends Component {
         this.zoomed = this.zoomed.bind(this)
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
+        this.svgRef = React.createRef();
+        this.groupRef = React.createRef();
+
+
     }
 
     keyDown(event) {
@@ -113,8 +117,8 @@ class DagreD3React extends Component {
         this.g = new dagreD3.graphlib.Graph().setGraph(DEFAULT_PARAMS);
         this.addNodes()
         this.addLines()
-        this.svg = d3.select(this.refs.svg)
-        this.svgGroup = d3.select(this.refs.group);
+        this.svg = d3.select(this.svgRef.current)
+        this.svgGroup = d3.select(this.groupRef.current);
         this.graphRender = new dagreD3.render();
         this.renderGraph()
 
@@ -159,9 +163,11 @@ class DagreD3React extends Component {
                 <svg
                     className="svgtest"
                     style={this.props.svgStyle}
-                    ref='svg'
+                    ref={this.svgRef}
                 >
-                    <g ref='group'></g>
+                    <g 
+                    ref={this.groupRef}
+                    ></g>
                 </svg>
             </div>
         )
