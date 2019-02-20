@@ -1,6 +1,6 @@
 {
   "name": "react-directed-graph",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/react-directed-graph.js",
   "scripts": {
@@ -22,6 +22,8 @@
   "author": "Tobias Kwant",
   "license": "ISC",
   "devDependencies": {
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
@@ -46,8 +48,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.7.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "dagre-d3": "^0.6.1",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
     "react-element-to-jsx-string": "^14.0.2",
     "react-style-object-to-css": "^1.1.2"
   }

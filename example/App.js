@@ -15,7 +15,6 @@ class App extends Component {
         this.svgStyle = {
             width: "800px",
             border: "2px solid"
-
         }
 
         this.toggle = this.toggle.bind(this);
