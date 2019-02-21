@@ -53,10 +53,10 @@ class DagreD3React extends Component {
 
     componentWillReceiveProps(props) {
         this.props = props
-        const oldNodesIds = Object.keys(this.g._nodes).map(el=>parseInt(el))
+        const oldNodesIds = Object.keys(this.g._nodes).map(el => parseInt(el))
         const newNodesIds = this.props.children.map(el => el.props.id)
         const nodesToRemove = _.difference(oldNodesIds, newNodesIds)
-        nodesToRemove.forEach(el=>this.g.removeNode(el))
+        nodesToRemove.forEach(el => this.g.removeNode(el))
 
         this.addNodes()
         this.addLines()
@@ -81,7 +81,7 @@ class DagreD3React extends Component {
         this.svgGroup.attr('transform', 'translate(' + d3.event.transform.x + ',' + d3.event.transform.y + ') scale(' + d3.event.transform.k + ')');
     }
 
-    addNodes(){
+    addNodes() {
         this.props.children.forEach((node) => {
             this.g.setNode(node.props.id, {
                 label: renderToStaticMarkup(node),
@@ -92,14 +92,14 @@ class DagreD3React extends Component {
         })
     }
 
-    addLines(){
-        this.props.children.forEach((node) =>{
-            node.props.connection.forEach((line)=>{
+    addLines() {
+        this.props.children.forEach((node) => {
+            node.props.connection.forEach((line) => {
                 this.g.setEdge(node.props.id, line.id, {
                     labelType: 'html',
                     label: line.label,
                     style: reactToCSS(line.lineStyle),
-                    curve: d3.curveBasis ,
+                    curve: d3.curveBasis,
                     // style: "stroke: #f66; stroke-width: 3px; stroke-dasharray: 5, 5;",
                     arrowheadStyle: reactToCSS(line.arrowheadStyle)
                 })
@@ -107,7 +107,7 @@ class DagreD3React extends Component {
         })
     }
 
-    addNodeClickListener(){
+    addNodeClickListener() {
         if (this.props.nodesOnClick) {
             this.svg.selectAll(".node").on('click', (e) => {
 
@@ -153,7 +153,6 @@ class DagreD3React extends Component {
     centerGraph() {
         this.svgNode = this.svg.node();
         this.x = (this.svgNode.getBoundingClientRect().width - this.g.graph().width) / 2;
-        debugger
         this.y = 50
         this.k = 1
         this.svgGroup.attr("transform", "translate(" + this.x + ", " + this.y + ") ");
@@ -161,7 +160,17 @@ class DagreD3React extends Component {
 
     setSvgHeight() {
         this.graphHeight = this.g.graph().height
-        this.svgNode.setAttribute("height", this.props.height ? this.props.height : this.graphHeight+ 2*50);
+        this.svgNode.setAttribute("height", this.props.height ? this.props.height : this.graphHeight + 2 * 50);
+    }
+
+    renderTitleBox() {
+        if (this.props.titleBox) {
+            return (
+                <foreignObject x="46" y="22" width="200" height="200">
+                    {this.props.titleBox}
+                </foreignObject>
+            )
+        }
     }
 
     render() {
@@ -172,8 +181,10 @@ class DagreD3React extends Component {
                     style={this.props.svgStyle}
                     ref={this.svgRef}
                 >
-                    <g 
-                    ref={this.groupRef}
+                    {this.renderTitleBox()}
+
+                    <g
+                        ref={this.groupRef}
                     ></g>
                 </svg>
             </div>
