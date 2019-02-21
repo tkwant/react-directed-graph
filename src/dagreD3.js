@@ -4,6 +4,7 @@ import * as d3 from 'd3'
 import reactToCSS from 'react-style-object-to-css'
 import { renderToStaticMarkup } from 'react-dom/server'
 import './dagreD3.scss'
+import _ from 'lodash'
 
 
 const DEFAULT_PARAMS = {
@@ -52,6 +53,11 @@ class DagreD3React extends Component {
 
     componentWillReceiveProps(props) {
         this.props = props
+        const oldNodesIds = Object.keys(this.g._nodes).map(el=>parseInt(el))
+        const newNodesIds = this.props.children.map(el => el.props.id)
+        const nodesToRemove = _.difference(oldNodesIds, newNodesIds)
+        nodesToRemove.forEach(el=>this.g.removeNode(el))
+
         this.addNodes()
         this.addLines()
         this.updateGraph()

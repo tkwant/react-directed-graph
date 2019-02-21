@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import DagreD3 from '../dist/react-directed-graph'
+// import DagreD3 from '../dist/react-directed-graph'
+import DagreD3 from'../src/dagreD3'
 import Node1 from './components/node1'
 import './components/node.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -129,9 +130,75 @@ class App extends Component {
     }
 
     testButtonHandler() {
-        let state = this.state
-        state.nodes[1].title += "U"
-        this.setState(state)
+        // let state = this.state
+        // state.nodes[1].title += "U"
+        // this.setState(state)
+        this.setState({
+            modal: false,
+            nodes: [
+                {
+                    id: 10,
+                    type: "node1",
+                    title: 'asdasd',
+                    footer: "asdasd",
+                    connection: [
+                        {
+                            id: 11,
+                        },
+                        {
+                            id: 12,
+                        }
+                    ],
+                },
+                {
+                    id: 11,
+                    type: "node1",
+                    title: "asd",
+                    footer: "asd",
+                    connection: [
+                        {
+                            id: 12,
+                            label: 'test label ',
+
+                        }
+                    ],
+                },
+                {
+                    id: 12,
+                    type: "node1",
+                    title: "asdad",
+                    footer: "asd",
+                    connection: [
+                        {
+                            id: 10,
+                            lineStyle: {
+                                stroke: 'red',
+                                strokeWidth: '1.8px',
+                                fill: 'white',
+                                strokeDasharray: '5, 5'
+                            },
+                            arrowheadStyle: {
+                                fill: 'red',
+                                stroke: 'none'
+                            }
+                        }
+                    ],
+                },
+                {
+                    id: 13,
+                    type: "node1",
+                    title: "BigBen",
+                    connection: [
+                        {
+                            id: 12,
+                            label: 'test label'
+                        }
+                    ],
+                },
+            ],
+        })
+    
+    
     }
 
     renderNodes() {
