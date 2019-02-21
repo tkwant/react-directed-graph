@@ -153,14 +153,15 @@ class DagreD3React extends Component {
     centerGraph() {
         this.svgNode = this.svg.node();
         this.x = (this.svgNode.getBoundingClientRect().width - this.g.graph().width) / 2;
-        this.y = 100
+        debugger
+        this.y = 50
         this.k = 1
         this.svgGroup.attr("transform", "translate(" + this.x + ", " + this.y + ") ");
     }
 
     setSvgHeight() {
         this.graphHeight = this.g.graph().height
-        this.svgNode.setAttribute("height", this.props.height ? this.props.height : this.graphHeight + this.y * 2);
+        this.svgNode.setAttribute("height", this.props.height ? this.props.height : this.graphHeight+ 2*50);
     }
 
     render() {

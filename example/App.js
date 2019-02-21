@@ -190,6 +190,17 @@ class App extends Component {
                     title: "BigBen",
                     connection: [
                         {
+                            id: 14,
+                            label: 'test label'
+                        }
+                    ],
+                },
+                {
+                    id: 14,
+                    type: "node1",
+                    title: "BigBen",
+                    connection: [
+                        {
                             id: 12,
                             label: 'test label'
                         }
