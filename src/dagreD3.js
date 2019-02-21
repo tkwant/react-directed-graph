@@ -4,6 +4,7 @@ import * as d3 from 'd3'
 import reactToCSS from 'react-style-object-to-css'
 import { renderToStaticMarkup } from 'react-dom/server'
 import './dagreD3.scss'
+import _ from 'lodash'
 
 
 const DEFAULT_PARAMS = {
@@ -22,6 +23,10 @@ class DagreD3React extends Component {
         this.zoomed = this.zoomed.bind(this)
         this.keyDown = this.keyDown.bind(this);
         this.keyUp = this.keyUp.bind(this);
+        this.svgRef = React.createRef();
+        this.groupRef = React.createRef();
+
+
     }
 
     keyDown(event) {
@@ -48,6 +53,11 @@ class DagreD3React extends Component {
 
     componentWillReceiveProps(props) {
         this.props = props
+        const oldNodesIds = Object.keys(this.g._nodes).map(el=>parseInt(el))
+        const newNodesIds = this.props.children.map(el => el.props.id)
+        const nodesToRemove = _.difference(oldNodesIds, newNodesIds)
+        nodesToRemove.forEach(el=>this.g.removeNode(el))
+
         this.addNodes()
         this.addLines()
         this.updateGraph()
@@ -113,8 +123,8 @@ class DagreD3React extends Component {
         this.g = new dagreD3.graphlib.Graph().setGraph(DEFAULT_PARAMS);
         this.addNodes()
         this.addLines()
-        this.svg = d3.select(this.refs.svg)
-        this.svgGroup = d3.select(this.refs.group);
+        this.svg = d3.select(this.svgRef.current)
+        this.svgGroup = d3.select(this.groupRef.current);
         this.graphRender = new dagreD3.render();
         this.renderGraph()
 
@@ -143,14 +153,15 @@ class DagreD3React extends Component {
     centerGraph() {
         this.svgNode = this.svg.node();
         this.x = (this.svgNode.getBoundingClientRect().width - this.g.graph().width) / 2;
-        this.y = 100
+        debugger
+        this.y = 50
         this.k = 1
         this.svgGroup.attr("transform", "translate(" + this.x + ", " + this.y + ") ");
     }
 
     setSvgHeight() {
         this.graphHeight = this.g.graph().height
-        this.svgNode.setAttribute("height", this.props.height ? this.props.height : this.graphHeight + this.y * 2);
+        this.svgNode.setAttribute("height", this.props.height ? this.props.height : this.graphHeight+ 2*50);
     }
 
     render() {
@@ -159,9 +170,11 @@ class DagreD3React extends Component {
                 <svg
                     className="svgtest"
                     style={this.props.svgStyle}
-                    ref='svg'
+                    ref={this.svgRef}
                 >
-                    <g ref='group'></g>
+                    <g 
+                    ref={this.groupRef}
+                    ></g>
                 </svg>
             </div>
         )
