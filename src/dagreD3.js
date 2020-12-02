@@ -76,7 +76,7 @@ class DagreD3React extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.keyDown, false)
-    document.addEventListener('keyup', this.keyUp, false)
+    document.removeEventListener('keyup', this.keyUp, false)
   }
 
   zoomed() {
